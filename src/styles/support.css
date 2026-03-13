@@ -1,0 +1,179 @@
+.support-view {
+  padding: 0 20px 48px;
+}
+
+.support-header {
+  padding: 28px 0 24px;
+}
+
+.support-header h1 {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.6px;
+  margin-bottom: 4px;
+}
+
+.support-header p {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.support-section {
+  margin-bottom: 28px;
+}
+
+/* FAQ */
+.faq-list {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--border);
+}
+
+.faq-item:last-child {
+  border-bottom: none;
+}
+
+.faq-q {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 15px 16px;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+  gap: 12px;
+  transition: background 150ms ease;
+}
+
+.faq-q:active {
+  background: var(--accent-soft);
+}
+
+.faq-arr {
+  font-size: 22px;
+  line-height: 1;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  transition: transform 260ms cubic-bezier(0.34, 1.2, 0.64, 1);
+  display: inline-block;
+}
+
+.faq-arr.up {
+  transform: rotate(-90deg);
+}
+
+.faq-a {
+  font-size: 13px;
+  color: var(--text-muted);
+  padding: 0 16px 15px;
+  line-height: 1.65;
+  animation: faqOpen 220ms ease both;
+}
+
+@keyframes faqOpen {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Contact form */
+.contact-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.support-input,
+.support-textarea {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  font-size: 14px;
+  outline: none;
+  width: 100%;
+  transition: border-color 200ms ease;
+}
+
+.support-input:focus,
+.support-textarea:focus {
+  border-color: var(--border-hard);
+}
+
+.support-input::placeholder,
+.support-textarea::placeholder {
+  color: var(--text-muted);
+}
+
+.support-textarea {
+  resize: none;
+  line-height: 1.55;
+}
+
+.support-send-btn {
+  background: var(--accent);
+  color: #000;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 12px;
+  border-radius: var(--radius-sm);
+  transition:
+    opacity 150ms ease,
+    transform 130ms ease;
+}
+
+.support-send-btn:active {
+  opacity: 0.82;
+  transform: scale(0.98);
+}
+
+/* Sent state */
+.support-sent {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  text-align: center;
+  animation: faqOpen 300ms ease both;
+}
+
+.support-sent p {
+  font-size: 17px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.support-sent span {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* Response badge */
+.response-badge {
+  font-size: 13px;
+  color: var(--text-muted);
+  text-align: center;
+  padding: 14px;
+  border-radius: var(--radius);
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+
+.response-badge strong {
+  color: var(--text);
+}

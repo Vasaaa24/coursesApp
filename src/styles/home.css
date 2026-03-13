@@ -1,0 +1,239 @@
+.home-view {
+  padding: 0 20px 20px;
+}
+
+/* Header */
+.home-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 28px 0 20px;
+}
+
+.greeting-label {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.greeting-name {
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: -0.8px;
+}
+
+.home-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--surface-2);
+  border: 1px solid var(--border-hard);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+/* Stats bar */
+.home-stats {
+  display: flex;
+  align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 0;
+  margin-bottom: 28px;
+}
+
+.hstat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+
+.hstat-sep {
+  width: 1px;
+  height: 28px;
+  background: var(--border-hard);
+}
+
+.hstat-num {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.hstat-label {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+/* Sections */
+.home-section {
+  margin-bottom: 28px;
+}
+
+/* Featured card */
+.featured-card {
+  background: var(--surface);
+  border: 1px solid var(--border-hard);
+  border-radius: var(--radius-lg);
+  padding: 22px;
+  position: relative;
+  overflow: hidden;
+}
+
+.featured-card::before {
+  content: "";
+  position: absolute;
+  top: -30px;
+  right: -30px;
+  width: 140px;
+  height: 140px;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.04),
+    transparent 70%
+  );
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.featured-chips {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.chip-cat {
+  font-size: 11px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: var(--accent-medium);
+  color: var(--text-muted);
+}
+
+.chip-lvl {
+  font-size: 11px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  border: 1px solid var(--border-hard);
+  color: var(--text-muted);
+}
+
+.featured-title {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.4px;
+  line-height: 1.25;
+  margin-bottom: 6px;
+}
+
+.featured-instructor {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+.featured-progress-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.featured-progress-row .progress-bar {
+  flex: 1;
+  height: 4px;
+}
+
+.progress-pct {
+  font-size: 12px;
+  color: var(--text-muted);
+  min-width: 30px;
+}
+
+.featured-cta {
+  background: var(--accent);
+  color: #000;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: var(--radius-sm);
+  transition:
+    opacity 150ms ease,
+    transform 130ms ease;
+}
+
+.featured-cta:active {
+  opacity: 0.82;
+  transform: scale(0.97);
+}
+
+/* Recommended grid */
+.rec-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.rec-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  opacity: 0;
+  animation: recIn 420ms cubic-bezier(0.25, 0.9, 0.35, 1) forwards;
+}
+
+@keyframes recIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.rec-icon {
+  width: 34px;
+  height: 34px;
+  background: var(--surface-3);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+
+.rec-title {
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 6px;
+}
+
+.rec-meta {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.rec-lvl {
+  font-size: 10px;
+  padding: 2px 7px;
+  border-radius: 999px;
+  border: 1px solid var(--border-hard);
+  color: var(--text-muted);
+}
