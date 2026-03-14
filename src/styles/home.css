@@ -14,12 +14,14 @@
   font-size: 14px;
   color: var(--text-muted);
   margin-bottom: 4px;
+  animation: fadeUp 480ms cubic-bezier(0.22, 1, 0.36, 1) both 80ms;
 }
 
 .greeting-name {
   font-size: 30px;
   font-weight: 700;
   letter-spacing: -0.8px;
+  animation: fadeUp 520ms cubic-bezier(0.22, 1, 0.36, 1) both 160ms;
 }
 
 .home-avatar {
@@ -36,6 +38,17 @@
   letter-spacing: 0.5px;
   color: var(--text-muted);
   flex-shrink: 0;
+  animation: scaleIn 500ms cubic-bezier(0.34, 1.56, 0.64, 1) both 200ms;
+  animation-name: scaleIn;
+  /* ring pulse */
+  animation:
+    scaleIn 500ms cubic-bezier(0.34, 1.56, 0.64, 1) both 200ms,
+    ringPulse 3.5s ease-in-out infinite 900ms;
+  transition: transform 150ms ease;
+}
+
+.home-avatar:active {
+  transform: scale(0.93);
 }
 
 /* Stats bar */
@@ -47,6 +60,15 @@
   border-radius: var(--radius);
   padding: 16px 0;
   margin-bottom: 28px;
+  animation: fadeUp 500ms cubic-bezier(0.22, 1, 0.36, 1) both 240ms;
+  transition:
+    border-color 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.home-stats:hover {
+  border-color: var(--border-hard);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
 }
 
 .hstat {
@@ -67,6 +89,21 @@
   font-size: 22px;
   font-weight: 700;
   letter-spacing: -0.5px;
+  color: var(--hl);
+  text-shadow: 0 0 14px var(--hl-glow);
+  animation: numPop 600ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  animation-delay: calc(var(--i, 0) * 90ms + 320ms);
+}
+
+@keyframes numPop {
+  from {
+    opacity: 0;
+    transform: scale(0.6) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
 }
 
 .hstat-label {
@@ -87,6 +124,51 @@
   padding: 22px;
   position: relative;
   overflow: hidden;
+  animation: fadeUp 540ms cubic-bezier(0.22, 1, 0.36, 1) both 300ms;
+  transition:
+    transform 200ms ease,
+    box-shadow 200ms ease,
+    border-color 200ms ease;
+}
+
+.featured-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 0 1px rgba(0, 212, 255, 0.12);
+  border-color: rgba(0, 212, 255, 0.18);
+}
+
+.featured-card:active {
+  transform: translateY(0);
+}
+
+/* Sweeping shimmer on hover */
+.featured-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 25%,
+    rgba(255, 255, 255, 0.04) 50%,
+    transparent 75%
+  );
+  background-size: 200% 100%;
+  background-position: -200% center;
+  pointer-events: none;
+  transition: background-position 0ms;
+}
+
+.featured-card:hover::after {
+  animation: cardShimmer 700ms ease forwards;
+}
+
+@keyframes cardShimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
 }
 
 .featured-card::before {
@@ -166,9 +248,34 @@
   font-weight: 600;
   padding: 10px 20px;
   border-radius: var(--radius-sm);
+  position: relative;
+  overflow: hidden;
   transition:
     opacity 150ms ease,
-    transform 130ms ease;
+    transform 130ms ease,
+    box-shadow 200ms ease;
+}
+
+.featured-cta::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.3) 50%,
+    transparent 70%
+  );
+  background-size: 200% 100%;
+  background-position: -200% center;
+}
+
+.featured-cta:hover::after {
+  animation: btnShimmer 550ms ease forwards;
+}
+
+.featured-cta:hover {
+  box-shadow: 0 3px 16px rgba(255, 255, 255, 0.2);
 }
 
 .featured-cta:active {
@@ -189,7 +296,22 @@
   border-radius: var(--radius);
   padding: 16px;
   opacity: 0;
-  animation: recIn 420ms cubic-bezier(0.25, 0.9, 0.35, 1) forwards;
+  animation: recIn 480ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+  cursor: pointer;
+}
+
+.rec-card:hover {
+  transform: translateY(-3px) scale(1.01);
+  border-color: var(--border-hard);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.45);
+}
+
+.rec-card:active {
+  transform: scale(0.98);
 }
 
 @keyframes recIn {
