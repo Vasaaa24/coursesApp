@@ -17,6 +17,7 @@ export type User = {
   id: number;
   name: string;
   email: string;
+  password: string;
   role: "admin" | "user";
   enrolledCourses: number[];
   joined: string;
@@ -108,6 +109,7 @@ export const CURRENT_USER: User = {
   id: 1,
   name: "Алекс Новотный",
   email: "alex@courseapp.ru",
+  password: "admin123",
   role: "admin",
   enrolledCourses: [1, 2, 4],
   joined: "Январь 2026",
@@ -120,6 +122,7 @@ export const ALL_USERS: User[] = [
     id: 2,
     name: "Софья Крейчи",
     email: "sophie@example.com",
+    password: "sophie123",
     role: "user",
     enrolledCourses: [1, 3],
     joined: "Февраль 2026",
@@ -129,6 +132,7 @@ export const ALL_USERS: User[] = [
     id: 3,
     name: "Мартин Дворжак",
     email: "martin@example.com",
+    password: "martin123",
     role: "user",
     enrolledCourses: [2, 4, 5],
     joined: "Февраль 2026",
@@ -138,6 +142,7 @@ export const ALL_USERS: User[] = [
     id: 4,
     name: "Яна Прохазкова",
     email: "jana@example.com",
+    password: "jana123",
     role: "user",
     enrolledCourses: [1],
     joined: "Март 2026",
@@ -147,6 +152,7 @@ export const ALL_USERS: User[] = [
     id: 5,
     name: "Радек Шиманек",
     email: "radek@example.com",
+    password: "radek123",
     role: "user",
     enrolledCourses: [3, 6],
     joined: "Март 2026",

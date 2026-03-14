@@ -7,6 +7,7 @@
   align-items: baseline;
   justify-content: space-between;
   padding: 28px 20px 12px;
+  animation: fadeUp 440ms cubic-bezier(0.22, 1, 0.36, 1) both 60ms;
 }
 
 .courses-header h1 {
@@ -34,11 +35,15 @@
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  transition: border-color 200ms ease;
+  transition:
+    border-color 200ms ease,
+    box-shadow 200ms ease;
+  animation: fadeUp 440ms cubic-bezier(0.22, 1, 0.36, 1) both 130ms;
 }
 
 .search-bar:focus-within {
-  border-color: var(--border-hard);
+  border-color: rgba(255, 255, 255, 0.22);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.05);
 }
 
 .search-bar svg {
@@ -89,9 +94,10 @@
 }
 
 .fchip.active {
-  background: var(--accent);
-  color: #000;
-  border-color: transparent;
+  background: var(--hl-mid);
+  color: var(--hl);
+  border-color: rgba(0, 212, 255, 0.35);
+  box-shadow: 0 0 10px var(--hl-soft);
 }
 
 /* Category scroll */
@@ -119,8 +125,9 @@
 }
 
 .cchip.active {
-  border-color: var(--border-hard);
-  color: var(--text);
+  border-color: rgba(0, 212, 255, 0.4);
+  color: var(--hl);
+  background: var(--hl-soft);
 }
 
 /* Course list */
@@ -147,23 +154,35 @@
   border-radius: var(--radius);
   padding: 14px;
   opacity: 0;
-  animation: rowIn 360ms cubic-bezier(0.25, 0.9, 0.35, 1) forwards;
+  animation: rowIn 420ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
   cursor: pointer;
-  transition: border-color 160ms ease;
+  transition:
+    border-color 180ms ease,
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.course-row:hover {
+  border-color: rgba(0, 212, 255, 0.22);
+  transform: translateX(3px);
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(0, 212, 255, 0.08);
 }
 
 .course-row:active {
+  transform: scale(0.99);
   border-color: var(--border-hard);
 }
 
 @keyframes rowIn {
   from {
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateX(-12px);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateX(0);
   }
 }
 
@@ -179,6 +198,11 @@
   font-weight: 700;
   color: var(--text-muted);
   flex-shrink: 0;
+  transition: transform 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.course-row:hover .course-row-icon {
+  transform: scale(1.08) rotate(-3deg);
 }
 
 .course-row-body {
@@ -232,6 +256,37 @@
 
 .done-mark {
   font-size: 15px;
+  color: var(--hl);
+  flex-shrink: 0;
+  text-shadow: 0 0 8px var(--hl-glow);
+}
+
+/* Locked course */
+.course-row--locked {
+  opacity: 0.48;
+}
+
+.course-row--locked:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.course-lock {
   color: var(--text-muted);
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  animation: lockPulse 2.8s ease-in-out infinite;
+}
+
+@keyframes lockPulse {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.12);
+  }
 }

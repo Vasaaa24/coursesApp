@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { COURSES } from "../logic/mockData";
+import { useAuth } from "../logic/useAuth";
 import "../styles/courses.css";
 
 const CATEGORIES = ["Все", "Трейдинг", "Крипто", "Инвестиции"];
@@ -21,10 +22,34 @@ const SearchIcon = () => (
   </svg>
 );
 
-export function CoursesView() {
+const LockIcon = () => (
+  <svg
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.8"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden
+  >
+    <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+  </svg>
+);
+
+export function CoursesView({
+  onCourseOpen,
+}: {
+  onCourseOpen: (id: number) => void;
+}) {
+  const { user } = useAuth();
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("Все");
   const [filter, setFilter] = useState<Filter>("all");
+
+  const enrolled = user?.enrolledCourses ?? [];
 
   const filtered = COURSES.filter((c) => {
     const matchCat = category === "Все" || c.category === category;
@@ -96,36 +121,51 @@ export function CoursesView() {
         {filtered.length === 0 && (
           <p className="no-results">Курсы не найдены</p>
         )}
-        {filtered.map((course, i) => (
-          <div
-            key={course.id}
-            className="course-row"
-            style={{ animationDelay: `${i * 55}ms` }}
-          >
-            <div className="course-row-icon">{course.category.charAt(0)}</div>
-            <div className="course-row-body">
-              <div className="course-row-top">
-                <h3 className="course-row-title">{course.title}</h3>
-                <span className={`lvl-badge lvl-${course.level.toLowerCase()}`}>
-                  {course.level}
-                </span>
-              </div>
-              <p className="course-row-meta">
-                {course.instructor} · {course.duration} · {course.lessons}{" "}
-                уроков
-              </p>
-              {course.progress > 0 && (
-                <div className="progress-bar thin">
-                  <div
-                    className="progress-fill"
-                    style={{ width: `${course.progress}%` }}
-                  />
+        {filtered.map((course, i) => {
+          const isLocked = !enrolled.includes(course.id);
+          return (
+            <div
+              key={course.id}
+              className={`course-row${isLocked ? " course-row--locked" : ""}`}
+              style={{ animationDelay: `${i * 55}ms` }}
+              onClick={() => onCourseOpen(course.id)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => e.key === "Enter" && onCourseOpen(course.id)}
+            >
+              <div className="course-row-icon">{course.category.charAt(0)}</div>
+              <div className="course-row-body">
+                <div className="course-row-top">
+                  <h3 className="course-row-title">{course.title}</h3>
+                  <span
+                    className={`lvl-badge lvl-${course.level.toLowerCase()}`}
+                  >
+                    {course.level}
+                  </span>
                 </div>
-              )}
+                <p className="course-row-meta">
+                  {course.instructor} · {course.duration} · {course.lessons}{" "}
+                  уроков
+                </p>
+                {course.progress > 0 && !isLocked && (
+                  <div className="progress-bar thin">
+                    <div
+                      className="progress-fill"
+                      style={{ width: `${course.progress}%` }}
+                    />
+                  </div>
+                )}
+              </div>
+              {isLocked ? (
+                <span className="course-lock">
+                  <LockIcon />
+                </span>
+              ) : course.progress === 100 ? (
+                <span className="done-mark">✓</span>
+              ) : null}
             </div>
-            {course.progress === 100 && <span className="done-mark">✓</span>}
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );
